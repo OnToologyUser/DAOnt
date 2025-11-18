@@ -1,4 +1,4 @@
-PREFIX dataact: <http://www.semanticweb.org/dataact#>
+PREFIX daont: <http://www.semanticweb.org/daont#>
 PREFIX dpv: <https://w3c.github.io/dpv/2.2/dpv/#>
 
 SELECT DISTINCT 
@@ -10,20 +10,20 @@ SELECT DISTINCT
     ("DATA_NOT_PROVIDED" AS ?violationType)
     ("Article 4(1) VIOLATED: Data holder failed to provide data to user" AS ?details)
 WHERE {
-  ?b2cSharing a dataact:B2CDataSharing ;
-              dataact:governedBy ?contract .
+  ?b2cSharing a daont:B2CDataSharing ;
+              daont:governedBy ?contract .
   ?contract dpv:hasRecipient ?user .
-  ?user a dataact:ConsumerUser ;
-        dataact:ownsOrUses ?product ;
-        dataact:requestsAccessTo ?data .
-  ?product a dataact:ConnectedProduct .
-  ?data dataact:isGeneratedBy ?product .
-  ?holder a dataact:DataHolder ;
+  ?user a daont:ConsumerUser ;
+        daont:ownsOrUses ?product ;
+        daont:requestsAccessTo ?data .
+  ?product a daont:ConnectedProduct .
+  ?data daont:isGeneratedBy ?product .
+  ?holder a daont:DataHolder ;
           dpv:hasData ?data .
   
   FILTER NOT EXISTS {
-    ?holder dataact:performsLegalAction ?provision .
-    ?provision a dataact:DataProvision .
+    ?holder daont:performsLegalAction ?provision .
+    ?provision a daont:ProvideData .
   }
 }
 ORDER BY ?user
@@ -32,4 +32,4 @@ ORDER BY ?user
 #### OUTPUTS:
 
 #b2cSharing || user || holder || product || data || violationType || details
-#http://www.semanticweb.org/dataact#b2cSharing_charlie || http://www.semanticweb.org/dataact#charlie ||	http://www.semanticweb.org/dataact#watchManufacturer ||	http://www.semanticweb.org/dataact#smartWatch1	|| http://www.semanticweb.org/dataact#charlieHealthData	|| "DATA_NOT_PROVIDED"	|| "Article 4(1) VIOLATED: Data holder failed to provide data to user"
+#http://www.semanticweb.org/daont#b2cSharing_charlie || http://www.semanticweb.org/daont#charlie ||	http://www.semanticweb.org/daont#watchManufacturer ||	http://www.semanticweb.org/daont#smartWatch1	|| http://www.semanticweb.org/daont#charlieHealthData	|| "DATA_NOT_PROVIDED"	|| "Article 4(1) VIOLATED: Data holder failed to provide data to user"

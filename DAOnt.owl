@@ -1515,18 +1515,18 @@
     
 
 
-    <!-- https://w3id.org/def/daont#DataProvision -->
+    <!-- https://w3id.org/def/daont#ProvideData -->
 
-    <owl:Class rdf:about="https://w3id.org/def/daont#DataProvision">
+    <owl:Class rdf:about="https://w3id.org/def/daont#ProvideData">
         <rdfs:subClassOf rdf:resource="https://w3id.org/def/daont#LegalAction"/>
-        <rdfs:label>Data Provision</rdfs:label>
+        <rdfs:label>Provide Data</rdfs:label>
         <skos:definition xml:lang="en">Legal action of making data available to a requesting party (user or data recipient). Acts as COMPLIANCE PROOF that data holder fulfilled their obligation under Article 4 (B2C) or Article 8 (B2B). Linked via performsLegalAction property.</skos:definition>
         <skos:example xml:lang="en">DataProvisionOfThermostatDataToAlice (compliant - thermostatManufacturer performed action). Missing DataProvision for charlieHealthData = Article 4(1) violation. Missing DataProvision for RobotData to autoRepair = Article 8(6) violation if no trade secret.</skos:example>
-        <skos:prefLabel xml:lang="en">Data Provision</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Provide Data</skos:prefLabel>
         <skos:prefLabel xml:lang="es">Provisión de Datos</skos:prefLabel>
         <skos:scopeNote xml:lang="en">CRITICAL FOR COMPLIANCE VERIFICATION: Absence of DataProvision action when data is requested indicates violation. SPARQL queries use &quot;FILTER NOT EXISTS { ?holder daont:performsLegalAction ?provision . ?provision a daont:DataProvision }&quot; to detect violations. Must be performed by DataHolder.</skos:scopeNote>
     </owl:Class>
-    
+
 
 
     <!-- https://w3id.org/def/daont#DataRecipient -->
@@ -2221,7 +2221,7 @@
         <skos:member rdf:resource="https://w3id.org/def/daont#ProductData"/>
         <skos:member rdf:resource="https://w3id.org/def/daont#UserAccessRight"/>
         <skos:member rdf:resource="https://w3id.org/def/daont#DataAccessRight"/>
-        <skos:member rdf:resource="https://w3id.org/def/daont#DataProvision"/>
+        <skos:member rdf:resource="https://w3id.org/def/daont#ProvideData"/>
         <skos:member rdf:resource="https://w3id.org/def/daont#DataRequest"/>
         <skos:member rdf:resource="https://w3id.org/def/daont#B2CDataSharing"/>
         <skos:member rdf:resource="https://w3id.org/def/daont#Manufacturer"/>

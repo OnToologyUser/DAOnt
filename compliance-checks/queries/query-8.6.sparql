@@ -1,4 +1,4 @@
-PREFIX dataact: <http://www.semanticweb.org/dataact#>
+PREFIX daont: <http://www.semanticweb.org/daont#>
 PREFIX dpv: <https://w3c.github.io/dpv/2.2/dpv/#>
 
 SELECT DISTINCT 
@@ -10,36 +10,36 @@ SELECT DISTINCT
     ("Article 8(6) VIOLATED: Data holder refused to share data without trade secret justification" AS ?details)
 WHERE {
   # B2B sharing agreement with authorization
-  ?b2bSharing a dataact:B2BDataSharing ;
-              dataact:governedBy ?contract ;
-              dataact:authorizedBy ?user .
+  ?b2bSharing a daont:B2BDataSharing ;
+              daont:governedBy ?contract ;
+              daont:authorizedBy ?user .
   
   # User owns/uses a product
-  ?user a dataact:User ;
-        dataact:ownsOrUses ?product .
+  ?user a daont:User ;
+        daont:ownsOrUses ?product .
   
   # Product generates data
-  ?product a dataact:ConnectedProduct ;
-           dataact:generatesData ?data .
+  ?product a daont:ConnectedProduct ;
+           daont:generatesData ?data .
   
   # Data holder has this data
-  ?holder a dataact:DataHolder ;
+  ?holder a daont:DataHolder ;
           dpv:hasData ?data .
   
   # Contract has recipient
   ?contract dpv:hasRecipient ?recipient .
-  ?recipient a dataact:DataRecipient .
+  ?recipient a daont:DataRecipient .
   
-  # VIOLATION: No data provision action exists
+  # VIOLATION: No provide data action exists
   FILTER NOT EXISTS {
-    ?holder dataact:performsLegalAction ?provision .
-    ?provision a dataact:DataProvision .
+    ?holder daont:performsLegalAction ?provision .
+    ?provision a daont:ProvideData .
   }
   
   # No trade secret justification exists
   FILTER NOT EXISTS {
-    ?data dataact:containsTradeSecret ?secret .
-    ?secret a dataact:TradeSecretData .
+    ?data daont:containsTradeSecret ?secret .
+    ?secret a daont:TradeSecretData .
   }
 }
 ORDER BY ?recipient
@@ -50,4 +50,4 @@ ORDER BY ?recipient
 #### OUTPUTS:
 
 # b2bSharing || holder || recipient data || violationType || details
-# http://www.semanticweb.org/dataact#agreement247 || http://www.semanticweb.org/dataact#RobotManufacturer || http://www.semanticweb.org/dataact#autoRepair || http://www.semanticweb.org/dataact#RobotData || "UNJUSTIFIED_REFUSAL" || "Article 8(6) VIOLATED: Data holder refused to share data without trade secret justification"
+# http://www.semanticweb.org/daont#agreement247 || http://www.semanticweb.org/daont#RobotManufacturer || http://www.semanticweb.org/daont#autoRepair || http://www.semanticweb.org/daont#RobotData || "UNJUSTIFIED_REFUSAL" || "Article 8(6) VIOLATED: Data holder refused to share data without trade secret justification"
